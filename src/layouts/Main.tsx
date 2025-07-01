@@ -5,6 +5,7 @@ import SessionChart from '../components/UI/charts/SessionChart';
 import Header from '../components/UI/Header';
 import SideBar from '../components/UI/SideBar';
 import Title from '../components/UI/Title';
+import KpiCards from './Kpi';
 function Main() {
   return (
     <div className="flex-grow">
@@ -30,7 +31,9 @@ function Main() {
                 </div>
               </div>
             </div>
-            <div className="flex-1/4 rounded bg-gray-700 p-12">test</div>
+            <div className="flex flex-1/4 flex-col gap-10">
+              <KpiCards />
+            </div>
           </div>
         </div>
       </div>
