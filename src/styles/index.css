@@ -21,6 +21,7 @@
   --color-pink: #fd5181;
   --color-white: #ffffff;
   --color-black: #000000;
+  --radius-chart: 5px;
 }
 
 :root {
@@ -35,4 +36,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+}
+.recharts-polar-grid-angle {
+  display: none;
 }
