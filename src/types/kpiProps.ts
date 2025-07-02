@@ -1,5 +1,5 @@
 import type { KpiProps } from './kpi';
 
-export interface KpiCardProps {
+export type KpiCardProps = {
   kpi: KpiProps;
-}
+};
