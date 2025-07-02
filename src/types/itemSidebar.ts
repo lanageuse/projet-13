@@ -6,8 +6,8 @@
  * @property {string} link - URL de destination du lien
  * @property {string} title - Texte d'accessibilité pour l'élément
  */
-export interface ItemSidebar {
+export type ItemSidebar = {
   component: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
   title: string;
-}
+};
