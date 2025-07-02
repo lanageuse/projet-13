@@ -15,11 +15,11 @@ const data: ScoreData[] = [{ uv: 12, fill: '#e60000' }];
 const ScoreChart: React.FC = (): JSX.Element => {
   return (
     <>
-      <h3 className="m-3 font-semibold">Score</h3>
-      <ResponsiveContainer width="100%" height="80%">
+      <h3 className="absolute m-3 font-semibold">Score</h3>
+      <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
           innerRadius="70%"
-          outerRadius="90%"
+          outerRadius="80%"
           barSize={15}
           data={data}
           startAngle={90}
