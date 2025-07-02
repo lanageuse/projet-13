@@ -1,6 +1,6 @@
 export const ApiEndpoints = {
-  User: '/user',
-  UserActivity: '/user/:userId/activity',
-  UserAverageSessions: '/user/:userId/average-sessions',
-  UserPerformance: '/user/:userId/performance',
+  User: 'http://localhost:3000/user/:userId',
+  UserActivity: 'http://localhost:3000/user/:userId/activity',
+  UserAverageSessions: 'http://localhost:3000/user/:userId/average-sessions',
+  UserPerformance: 'http://localhost:3000/user/:userId/performance',
 };
