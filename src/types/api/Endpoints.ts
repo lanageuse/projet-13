@@ -4,3 +4,5 @@ export const ApiEndpoints = {
   UserAverageSessions: 'http://localhost:3000/user/:userId/average-sessions',
   UserPerformance: 'http://localhost:3000/user/:userId/performance',
 };
+
+export type Endpoint = (typeof ApiEndpoints)[keyof typeof ApiEndpoints];

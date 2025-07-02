@@ -64,3 +64,10 @@ export type UserData = {
     lipidCount: number;
   };
 };
+
+export const authorizedId = {
+  karl: 12,
+  cecilia: 18,
+} as const;
+
+export type AuthorizedUserId = (typeof authorizedId)[keyof typeof authorizedId];
