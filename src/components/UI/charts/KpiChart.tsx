@@ -32,13 +32,7 @@ const KpiChart: React.FC = () => {
           dataKey="subject"
           tick={{ fill: '#fff', fontSize: 12, fontWeight: 'bold' }}
         />
-        <Radar
-          name="score"
-          dataKey="value"
-          fill="#e60000"
-          fillOpacity={0.6}
-          isAnimationActive={false}
-        />
+        <Radar name="score" dataKey="value" fill="#e60000" fillOpacity={0.6} />
       </RadarChart>
     </ResponsiveContainer>
   );
