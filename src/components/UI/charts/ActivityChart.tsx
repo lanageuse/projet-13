@@ -64,7 +64,7 @@ const data: Chart[] = [
 
 const ActivityChart: React.FC = (): JSX.Element => {
   return (
-    <ResponsiveContainer width="100%" height={320}>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <Legend
