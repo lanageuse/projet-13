@@ -9,58 +9,11 @@ import {
   Rectangle,
   YAxis,
 } from 'recharts';
-
-interface Session {
-  name: string;
-  uv: number;
-  pv: number;
-  amt: number;
-}
-
-const data: Session[] = [
-  {
-    name: 'L',
-    uv: 2300,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'M',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'M',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'J',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'V',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'S',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'D',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import useFetch from '../../../hooks/useFetch';
+import { ApiEndpoints } from '../../../types/api/endpoints';
+import { authorizedId } from '../../../types/api/user';
+import type { AverageSessionData } from '../../../types/api/session';
+import { CustomSessionTooltip } from './tooltips/CustomSessionTooltip';
 
 interface CursorProps {
   points: Array<{
@@ -90,12 +43,26 @@ const CustomCursor: React.FC<CursorProps> = ({
     />
   );
 };
-
+const dayWeek: Record<number, string> = {
+  1: 'L',
+  2: 'M',
+  3: 'M',
+  4: 'J',
+  5: 'V',
+  6: 'S',
+  7: 'D',
+};
 const SessionChart: React.FC = (): JSX.Element => {
+  const { state } = useFetch<AverageSessionData>(
+    authorizedId.cecilia,
+    ApiEndpoints.UserAverageSessions
+  );
+  const { data } = state;
+  const averageSessionData = data?.sessions;
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        data={data}
+        data={averageSessionData}
         margin={{
           top: 0,
           right: 0,
@@ -125,13 +92,15 @@ const SessionChart: React.FC = (): JSX.Element => {
           </tspan>
         </text>
         <YAxis
-          domain={['dataMin - 10', 'dataMax + 3000']}
+          name="min"
+          dataKey="sessionLength"
+          domain={['dataMin - 10', 'dataMax + 80']}
           tick={false}
           hide={true}
           axisLine={false}
         />
         <XAxis
-          dataKey="name"
+          dataKey="day"
           tickLine={false}
           axisLine={false}
           tick={{
@@ -142,16 +111,18 @@ const SessionChart: React.FC = (): JSX.Element => {
             panose1: 10,
           }}
           opacity={0.6}
+          tickFormatter={(index) => dayWeek[index]}
         />
         <Tooltip
           itemStyle={{ color: 'black' }}
           contentStyle={{ border: 0 }}
           cursor={<CustomCursor points={[]} />}
-          labelStyle={{ display: 'none' }}
+          content={<CustomSessionTooltip />}
         />
         <Area
           type="monotone"
-          dataKey="uv"
+          unit={' min'}
+          dataKey="sessionLength"
           stackId="1"
           stroke="url(#colorUv)"
           strokeWidth={2}
