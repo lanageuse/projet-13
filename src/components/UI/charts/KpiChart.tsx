@@ -5,34 +5,34 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from 'recharts';
-
-interface PerfData {
-  subject: string;
-  value: number;
-}
-
-const data: PerfData[] = [
-  { subject: 'Intensité', value: 80 },
-  { subject: 'Vitesse', value: 90 },
-  { subject: 'Force', value: 70 },
-  { subject: 'Endurance', value: 60 },
-  { subject: 'Energie', value: 85 },
-  { subject: 'Cardio', value: 75 },
-];
+import useFetch from '../../../hooks/useFetch';
+import type { PerformanceData } from '../../../types/api/performance';
+import { ApiEndpoints } from '../../../types/api/endpoints';
+import { authorizedId } from '../../../types/api/user';
 
 const KpiChart: React.FC = () => {
+  const { state } = useFetch<PerformanceData>(
+    authorizedId.cecilia,
+    ApiEndpoints.UserPerformance
+  );
+  const { data } = state;
+  const kindData = data?.kind;
+  const performanceData = data?.data;
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart
-        data={data}
+        data={performanceData}
         margin={{ left: 10, right: 20, top: 10, bottom: 10 }}
       >
         <PolarGrid gridType="polygon" />
         <PolarAngleAxis
-          dataKey="subject"
+          dataKey="value"
           tick={{ fill: '#fff', fontSize: 12, fontWeight: 'bold' }}
+          tickFormatter={(_value: string, index: number): string =>
+            kindData?.[index + 1] || ''
+          }
         />
-        <Radar name="score" dataKey="value" fill="#e60000" fillOpacity={0.6} />
+        <Radar dataKey="value" fill="#e60000" fillOpacity={0.6} />
       </RadarChart>
     </ResponsiveContainer>
   );
