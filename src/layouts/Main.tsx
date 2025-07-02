@@ -12,15 +12,15 @@ function Main() {
       <Header />
       <div className="flex flex-row">
         <SideBar />
-        <div className="flex w-full flex-col gap-8 lg:px-24 lg:py-16">
+        <div className="ml-32 flex w-full flex-col gap-8 lg:px-24 lg:py-16">
           <Title />
           <div className="flex gap-8">
             <div className="flex flex-3/4 flex-col gap-8">
-              <div className="rounded-chart bg-gray-700 p-12">
+              <div className="rounded-chart h-80 bg-gray-700 p-6">
                 <ActivityChart />
               </div>
-              <div className="flex flex-col gap-8 lg:flex-row">
-                <div className="bg-red rounded-chart h-80 flex-1/3">
+              <div className="flex h-60 flex-col gap-8 lg:flex-row">
+                <div className="bg-red rounded-chart flex-1/3">
                   <SessionChart />
                 </div>
                 <div className="bg-blue rounded-chart flex-1/3 pt-2">
