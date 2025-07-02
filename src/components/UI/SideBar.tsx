@@ -43,11 +43,11 @@ const Sidebar: React.FC = (): JSX.Element => {
   ];
 
   return (
-    <aside className="flex h-screen w-29 flex-col items-center justify-between bg-black p-4 text-white">
+    <aside className="fixed top-0 left-0 z-40 flex h-screen min-h-screen w-32 -translate-x-full flex-col items-center justify-between bg-black p-4 text-white transition-transform sm:translate-x-0">
       {/* Navigation principale avec les icônes d'activités */}
       <nav className="flex flex-grow flex-col items-center justify-center gap-4">
         {items.map((item: ItemSidebar, index: number) => {
-          const Component = item.component;
+          const Icon = item.component;
           return (
             <a
               href={item.link}
@@ -55,7 +55,7 @@ const Sidebar: React.FC = (): JSX.Element => {
               key={index}
               title={item.title}
             >
-              <Component />
+              <Icon />
             </a>
           );
         })}
