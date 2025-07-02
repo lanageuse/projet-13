@@ -20,7 +20,7 @@ interface Session {
 const data: Session[] = [
   {
     name: 'L',
-    uv: 400,
+    uv: 2300,
     pv: 2400,
     amt: 2400,
   },
