@@ -1,8 +1,10 @@
 import React, { type JSX } from 'react';
-import useUser from '../../hooks/useUser';
+import useFetch from '../../hooks/useFetch';
+import { ApiEndpoints } from '../../types/api/endpoints';
+import type { UserData } from '../../types/api/user';
 
 const Title: React.FC = (): JSX.Element => {
-  const { state } = useUser(18);
+  const { state } = useFetch<UserData>(18, ApiEndpoints.User);
   const { data } = state;
   return (
     <div className="flex flex-col gap-3">
