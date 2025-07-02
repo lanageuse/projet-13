@@ -64,20 +64,3 @@ export type UserData = {
     lipidCount: number;
   };
 };
-
-export type UserState = {
-  data: UserData | null;
-  status: string;
-  error: string | null;
-};
-
-export type UserAction =
-  | { type: 'FETCH_INIT' }
-  | { type: 'FETCH_SUCCESS'; payload: UserData }
-  | { type: 'FETCH_FAILURE'; error: string };
-
-export const InitialUserState: UserState = {
-  data: null,
-  status: 'idle',
-  error: null,
-};
