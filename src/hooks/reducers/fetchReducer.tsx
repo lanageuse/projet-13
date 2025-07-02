@@ -1,6 +1,9 @@
-import type { UserAction, UserState } from '../../types/api/user';
+import type { FetchAction, FetchState } from '../../types/fetch';
 
-function fetchReducer(state: UserState, action: UserAction): UserState {
+function fetchReducer<T>(
+  state: FetchState<T>,
+  action: FetchAction<T>
+): FetchState<T> {
   switch (action.type) {
     case 'FETCH_INIT': {
       return { ...state, status: 'loading', data: null, error: null };
