@@ -18,7 +18,7 @@ const Header: React.FC = (): JSX.Element => {
   const items: string[] = ['Accueil', 'Profil', 'Réglage', 'Communauté'];
 
   return (
-    <header className="bg-black">
+    <header className="relative z-50 bg-black">
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
