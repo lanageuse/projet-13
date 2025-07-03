@@ -5,12 +5,15 @@ import {
   PolarAngleAxis,
 } from 'recharts';
 import { useUser } from '../../../contexts/UserContext';
+import type { ScoreData } from '../../../types/charts/scoreData';
 
-interface ScoreData {
-  score: number | undefined;
-  fill: string;
-}
-
+/**
+ * Composant graphique circulaire affiche le score de l'utilisateur.
+ *
+ * @returns {JSX.Element} Un graphique radial responsive avec le score utilisateur
+ *
+ *
+ */
 const ScoreChart: React.FC = () => {
   const data = useUser();
   const rawScore = data?.score ?? data?.todayScore ?? 0;
