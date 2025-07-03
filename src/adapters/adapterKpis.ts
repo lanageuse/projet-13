@@ -5,7 +5,7 @@ import Proteine from '../assets/icons/proteine.svg?react';
 import Glucide from '../assets/icons/apple.svg?react';
 import Lipides from '../assets/icons/cheeseburger.svg?react';
 
-export const adaptaterKpis = (userKeyData: keyData | null): KpiProps[] => {
+export const adapterKpis = (userKeyData: keyData | null): KpiProps[] => {
   if (!userKeyData) return [];
   return [
     {
