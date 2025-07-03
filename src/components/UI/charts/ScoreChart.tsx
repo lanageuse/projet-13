@@ -1,4 +1,3 @@
-import type { JSX } from 'react';
 import {
   RadialBarChart,
   RadialBar,
@@ -12,7 +11,7 @@ interface ScoreData {
   fill: string;
 }
 
-const ScoreChart: React.FC = (): JSX.Element => {
+const ScoreChart: React.FC = () => {
   const data = useUser();
   const rawScore = data?.score ?? data?.todayScore ?? 0;
   const userScore = Math.round(rawScore * 100);

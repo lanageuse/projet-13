@@ -1,12 +1,12 @@
 import { createContext, useContext } from 'react';
 import useFetch from '../hooks/useFetch';
-import { ApiEndpoints } from '../types/api/Endpoints';
-import { type UserData, authorizedId } from '../types/api/User';
+import { ApiEndpoints } from '../types/api/endpoints';
+import { type UserData } from '../types/api/user';
 
 const UserContext = createContext<UserData | null>(null);
 
 export const UserProvider = ({ children }: React.PropsWithChildren) => {
-  const { state } = useFetch<UserData>(authorizedId.cecilia, ApiEndpoints.User);
+  const { state } = useFetch<UserData>(ApiEndpoints.User);
   const { data } = state;
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 };

@@ -1,4 +1,3 @@
-import type { JSX } from 'react';
 import {
   BarChart,
   Bar,
@@ -11,16 +10,12 @@ import {
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
 import { ApiEndpoints } from '../../../types/api/endpoints';
-import { authorizedId } from '../../../types/api/user';
 import type { ActivityData } from '../../../types/api/activity';
 import { CustomActivityLegend } from './legends/ActivityLegend';
 import { CustomActivityTooltip } from './tooltips/ActivityTooltip';
 
-const ActivityChart: React.FC = (): JSX.Element => {
-  const { state } = useFetch<ActivityData>(
-    authorizedId.cecilia,
-    ApiEndpoints.UserActivity
-  );
+const ActivityChart: React.FC = () => {
+  const { state } = useFetch<ActivityData>(ApiEndpoints.UserActivity);
   const { data } = state;
   const activityData = data?.sessions;
   return (

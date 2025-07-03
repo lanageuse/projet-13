@@ -1,7 +1,7 @@
-import React, { type JSX } from 'react';
+import React from 'react';
 import { useUser } from '../../contexts/UserContext';
 
-const Title: React.FC = (): JSX.Element => {
+const Title: React.FC = () => {
   const data = useUser();
   return (
     <div className="flex flex-col gap-3">

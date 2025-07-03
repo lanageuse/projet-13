@@ -1,4 +1,3 @@
-import type { JSX } from 'react';
 import {
   AreaChart,
   Area,
@@ -10,15 +9,13 @@ import {
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
 import { ApiEndpoints } from '../../../types/api/endpoints';
-import { authorizedId } from '../../../types/api/user';
 import type { AverageSessionData } from '../../../types/api/session';
 import { CustomSessionTooltip } from './tooltips/SessionTooltip';
 import { CustomCursor } from './cursor/CursorSession';
 import { adapterDayLabel } from '../../../adapters/adaptersSession';
 
-const SessionChart: React.FC = (): JSX.Element => {
+const SessionChart: React.FC = () => {
   const { state } = useFetch<AverageSessionData>(
-    authorizedId.cecilia,
     ApiEndpoints.UserAverageSessions
   );
   const { data } = state;

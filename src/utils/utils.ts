@@ -1,9 +1,4 @@
-export const buildEndpoint = (
-  path: string,
-  params: Record<string, string | number>
-) => {
-  return Object.keys(params).reduce(
-    (acc, key) => acc.replace(`:${key}`, String(params[key])),
-    path
-  );
+export const buildEndpoint = (path: string) => {
+  const user_id = import.meta.env.VITE_USER_ID;
+  return path.replace(':userId', user_id);
 };

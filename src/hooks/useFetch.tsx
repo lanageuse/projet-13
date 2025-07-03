@@ -3,12 +3,8 @@ import fetchReducer from './reducers/fetchReducer';
 import { buildEndpoint } from '../utils/utils';
 import { InitialFetchState, type FetchState } from '../types/fetch';
 import type { Endpoint } from '../types/api/endpoints';
-import type { AuthorizedUserId } from '../types/api/user';
 
-function useFetch<T>(
-  userId: AuthorizedUserId,
-  endPoint: Endpoint
-): { state: FetchState<T> } {
+function useFetch<T>(endPoint: Endpoint): { state: FetchState<T> } {
   const [state, dispatch] = useReducer(
     fetchReducer<T>,
     InitialFetchState as FetchState<T>
@@ -16,7 +12,7 @@ function useFetch<T>(
   const fetchUserData = useCallback(async () => {
     dispatch({ type: 'FETCH_INIT' });
     try {
-      const res = await fetch(buildEndpoint(endPoint, { userId }));
+      const res = await fetch(buildEndpoint(endPoint));
       if (!res.ok) {
         throw new Error('erreur serveur');
       }
@@ -25,7 +21,7 @@ function useFetch<T>(
     } catch (e) {
       dispatch({ type: 'FETCH_FAILURE', error: (e as Error).message });
     }
-  }, [userId, endPoint]);
+  }, [endPoint]);
 
   useEffect(() => {
     fetchUserData();

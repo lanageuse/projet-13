@@ -1,8 +1,7 @@
-import type { JSX } from 'react';
 import type React from 'react';
 import type { KpiCardProps } from '../../../types/kpiProps';
 
-const KpiCard: React.FC<KpiCardProps> = ({ kpi }): JSX.Element => {
+const KpiCard: React.FC<KpiCardProps> = ({ kpi }) => {
   const { svg, color, value, unity, ref } = kpi;
   const Component = svg;
   const bgColor: Record<string, string> = {

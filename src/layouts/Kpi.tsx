@@ -1,11 +1,10 @@
-import type { JSX } from 'react';
 import type React from 'react';
 import type { KpiProps } from '../types/kpi';
 import { useUser } from '../contexts/UserContext';
 import KpiCard from '../components/UI/kpi/KpiCard';
 import { adapterKpis } from '../adapters/adapterKpis';
 
-const KpiCards: React.FC = (): JSX.Element => {
+const KpiCards: React.FC = () => {
   const data = useUser();
   const kpis = adapterKpis(data?.keyData ?? null);
 

@@ -8,14 +8,10 @@ import {
 import useFetch from '../../../hooks/useFetch';
 import type { PerformanceData } from '../../../types/api/performance';
 import { ApiEndpoints } from '../../../types/api/endpoints';
-import { authorizedId } from '../../../types/api/user';
 import { adaptedPerformanceData } from '../../../adapters/adpaterPerformance';
 
 const PerformanceChart: React.FC = () => {
-  const { state } = useFetch<PerformanceData>(
-    authorizedId.cecilia,
-    ApiEndpoints.UserPerformance
-  );
+  const { state } = useFetch<PerformanceData>(ApiEndpoints.UserPerformance);
   const { data } = state;
   return (
     <ResponsiveContainer width="100%" height="100%">

@@ -1,14 +1,13 @@
-import type { JSX } from 'react';
 import logo from '../../assets/logo-sportsee.svg';
 
 /**
- * Composant d'en-tête principal de l'application SportSee
+ * Composant d'en-tête principal de l'application
  * Affiche le logo de l'application et la navigation horizontale principale
  *
  * @component
  * @returns {JSX.Element} Le composant d'en-tête avec navigation
  */
-const Header: React.FC = (): JSX.Element => {
+const Header: React.FC = () => {
   /**
    * Liste des éléments de navigation de l'en-tête
    * Contient les liens principaux de l'application
