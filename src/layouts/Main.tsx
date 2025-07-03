@@ -1,5 +1,5 @@
 import ActivityChart from '../components/UI/charts/ActivityChart';
-import KpiChart from '../components/UI/charts/KpiChart';
+import PerformanceChart from '../components/UI/charts/PerformanceChart';
 import ScoreChart from '../components/UI/charts/ScoreChart';
 import SessionChart from '../components/UI/charts/SessionChart';
 import Header from '../components/UI/Header';
@@ -24,7 +24,7 @@ function Main() {
                   <SessionChart />
                 </div>
                 <div className="bg-blue rounded-chart flex-1/3 pt-2">
-                  <KpiChart />
+                  <PerformanceChart />
                 </div>
                 <div className="rounded-chart relative flex-1/3 bg-gray-700">
                   <ScoreChart />
