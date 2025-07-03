@@ -1,7 +1,12 @@
+import { UserProvider } from './contexts/UserContext';
 import Home from './pages/Home';
 
 function App() {
-  return <Home />;
+  return (
+    <UserProvider>
+      <Home />
+    </UserProvider>
+  );
 }
 
 export default App;
