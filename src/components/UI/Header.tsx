@@ -8,12 +8,7 @@ import logo from '../../assets/logo-sportsee.svg';
  * @returns {JSX.Element} Le composant d'en-tête avec navigation
  */
 const Header: React.FC = () => {
-  /**
-   * Liste des éléments de navigation de l'en-tête
-   * Contient les liens principaux de l'application
-   *
-   * @type {string[]}
-   */
+  // Liste des éléments de navigation
   const items: string[] = ['Accueil', 'Profil', 'Réglage', 'Communauté'];
 
   return (

@@ -1,5 +1,12 @@
 import type { FetchAction, FetchState } from '../../types/fetch';
 
+/**
+ * Réducteur pour gérer les états de requêtes asynchrones (fetch).
+ * @template T Type des données attendues
+ * @param {FetchState<T>} state État courant
+ * @param {FetchAction<T>} action Action à traiter
+ * @returns {FetchState<T>} Nouvel état après traitement de l'action
+ */
 function fetchReducer<T>(
   state: FetchState<T>,
   action: FetchAction<T>

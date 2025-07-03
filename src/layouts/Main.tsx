@@ -6,6 +6,12 @@ import Header from '../components/UI/Header';
 import SideBar from '../components/UI/SideBar';
 import Title from '../components/UI/Title';
 import KpiCards from './Kpi';
+
+/**
+ * Mise en page principale de l'application SportSee.
+ * Affiche l'en-tête, la barre latérale, les graphiques et les KPI.
+ * @returns {JSX.Element} Structure principale de la page d'accueil
+ */
 function Main() {
   return (
     <div className="flex-grow">

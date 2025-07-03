@@ -1,6 +1,11 @@
 import type React from 'react';
 import type { KpiCardProps } from '../../../types/kpiProps';
 
+/**
+ * Carte KPI affichant une icône, une valeur et une référence.
+ * @param {KpiCardProps} props Propriétés de la carte KPI (kpi)
+ * @returns {JSX.Element} Composant visuel de la carte KPI
+ */
 const KpiCard: React.FC<KpiCardProps> = ({ kpi }) => {
   const { svg, color, value, unity, ref } = kpi;
   const Component = svg;

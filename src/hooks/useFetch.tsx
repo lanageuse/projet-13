@@ -4,6 +4,12 @@ import { buildEndpoint } from '../utils/utils';
 import { InitialFetchState, type FetchState } from '../types/fetch';
 import type { Endpoint } from '../types/api/endpoints';
 
+/**
+ * Hook personnalisé pour effectuer une requête fetch et gérer les états associés.
+ * @template T Type des données attendues
+ * @param {Endpoint} endPoint URL ou identifiant de l'endpoint à interroger
+ * @returns {{ state: FetchState<T> }} Objet contenant l'état de la requête (chargement, données, erreur)
+ */
 function useFetch<T>(endPoint: Endpoint): { state: FetchState<T> } {
   const [state, dispatch] = useReducer(
     fetchReducer<T>,

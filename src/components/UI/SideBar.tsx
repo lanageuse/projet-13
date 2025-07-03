@@ -12,12 +12,7 @@ import type { ItemSidebar } from '../../types/itemSidebar';
  * @returns {JSX.Element} Le composant de barre latérale
  */
 const Sidebar: React.FC = () => {
-  /**
-   * Liste des éléments de navigation de la barre latérale
-   * Chaque élément contient une icône, un lien et un titre d'accessibilité
-   *
-   * @type {ItemSidebar[]}
-   */
+  // Liste des éléments de navigation de la barre latérale
   const items: ItemSidebar[] = [
     {
       component: Zen,
