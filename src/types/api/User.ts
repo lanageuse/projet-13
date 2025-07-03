@@ -65,6 +65,17 @@ export type UserData = {
   };
 };
 
+export type keyData = {
+  /** Nombre de calories quotidiennes */
+  calorieCount: number;
+  /** Apport quotidien en protéines (en grammes) */
+  proteinCount: number;
+  /** Apport quotidien en glucides (en grammes) */
+  carbohydrateCount: number;
+  /** Apport quotidien en lipides (en grammes) */
+  lipidCount: number;
+};
+
 export const authorizedId = {
   karl: 12,
   cecilia: 18,

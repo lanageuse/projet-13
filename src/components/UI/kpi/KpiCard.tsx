@@ -11,6 +11,7 @@ const KpiCard: React.FC<KpiCardProps> = ({ kpi }): JSX.Element => {
     cyan: 'bg-cyan/5',
     pink: 'bg-pink/5',
   };
+
   return (
     <div className="rounded-chart align-center flex gap-6 bg-gray-700 p-5">
       <div className={`rounded-chart ${bgColor[color]} p-6`}>

@@ -7,8 +7,8 @@ import {
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
 import type { PerformanceData } from '../../../types/api/performance';
-import { ApiEndpoints } from '../../../types/api/endpoints';
-import { authorizedId } from '../../../types/api/user';
+import { ApiEndpoints } from '../../../types/api/Endpoints';
+import { authorizedId } from '../../../types/api/User';
 
 const KpiChart: React.FC = () => {
   const { state } = useFetch<PerformanceData>(
