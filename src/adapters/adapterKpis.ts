@@ -1,9 +1,16 @@
-import type { keyData } from '../types/api/User';
+import type { keyData } from '../types/api/user';
 import type { KpiProps } from '../types/kpi';
 import Calories from '../assets/icons/burn.svg?react';
 import Proteine from '../assets/icons/proteine.svg?react';
 import Glucide from '../assets/icons/apple.svg?react';
 import Lipides from '../assets/icons/cheeseburger.svg?react';
+
+/**
+ * Transforme les données provenat de l'api en props pour les composants KPI.
+ *
+ * @param userKeyData - Données nutritionnelles de l'utilisateur
+ * @returns Tableau de props KPI avec icônes, couleurs et valeurs formatées
+ */
 
 export const adapterKpis = (userKeyData: keyData | null): KpiProps[] => {
   if (!userKeyData) return [];
