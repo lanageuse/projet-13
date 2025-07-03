@@ -1,5 +1,10 @@
 import type { ActivityTooltip } from '../../../../types/charts/activityTooltip';
 
+/**
+ * Infobulle personnalisée pour le graphique d'activité.
+ * @param {ActivityTooltip} props Propriétés de l'infobulle (active, payload)
+ * @returns {JSX.Element} Contenu de l'infobulle ou div masquée
+ */
 export const CustomActivityTooltip = ({ active, payload }: ActivityTooltip) => {
   const isVisible = active && payload && payload.length;
   return (
