@@ -10,8 +10,8 @@ import {
   YAxis,
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
-import { ApiEndpoints } from '../../../types/api/Endpoints';
-import { authorizedId } from '../../../types/api/User';
+import { ApiEndpoints } from '../../../types/api/endpoints';
+import { authorizedId } from '../../../types/api/user';
 import type { ActivityData } from '../../../types/api/activity';
 import { CustomActivityLegend } from './legends/ActivityLegend';
 import { CustomActivityTooltip } from './tooltips/ActivityTooltip';

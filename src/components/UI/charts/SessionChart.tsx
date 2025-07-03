@@ -9,8 +9,8 @@ import {
   YAxis,
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
-import { ApiEndpoints } from '../../../types/api/Endpoints';
-import { authorizedId } from '../../../types/api/User';
+import { ApiEndpoints } from '../../../types/api/endpoints';
+import { authorizedId } from '../../../types/api/user';
 import type { AverageSessionData } from '../../../types/api/session';
 import { CustomSessionTooltip } from './tooltips/SessionTooltip';
 import { CustomCursor } from './cursor/CursorSession';

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useReducer } from 'react';
 import fetchReducer from './reducers/fetchReducer';
 import { buildEndpoint } from '../utils/utils';
 import { InitialFetchState, type FetchState } from '../types/fetch';
-import type { Endpoint } from '../types/api/Endpoints';
-import type { AuthorizedUserId } from '../types/api/User';
+import type { Endpoint } from '../types/api/endpoints';
+import type { AuthorizedUserId } from '../types/api/user';
 
 function useFetch<T>(
   userId: AuthorizedUserId,
