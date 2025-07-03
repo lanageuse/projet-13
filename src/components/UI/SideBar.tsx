@@ -1,4 +1,3 @@
-import React, { type JSX } from 'react';
 import Zen from '../../assets/icons/zen.svg?react';
 import Swim from '../../assets/icons/swim.svg?react';
 import Cycle from '../../assets/icons/cycle.svg?react';
