@@ -6,52 +6,16 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Rectangle,
   YAxis,
 } from 'recharts';
 import useFetch from '../../../hooks/useFetch';
-import { ApiEndpoints } from '../../../types/api/endpoints';
-import { authorizedId } from '../../../types/api/user';
+import { ApiEndpoints } from '../../../types/api/Endpoints';
+import { authorizedId } from '../../../types/api/User';
 import type { AverageSessionData } from '../../../types/api/session';
-import { CustomSessionTooltip } from './tooltips/CustomSessionTooltip';
+import { CustomSessionTooltip } from './tooltips/SessionTooltip';
+import { CustomCursor } from './cursor/CursorSession';
+import { adapterDayLabel } from '../../../adapters/adaptersSession';
 
-interface CursorProps {
-  points: Array<{
-    x: number;
-    y: number;
-  }>;
-  width?: number;
-  height?: number;
-}
-
-const CustomCursor: React.FC<CursorProps> = ({
-  points,
-  width = 0,
-  height = 0,
-}) => {
-  if (!points || points.length === 0) return null;
-
-  const { x, y } = points[0];
-
-  return (
-    <Rectangle
-      fill="rgba(0,0,0,0.3)"
-      x={x}
-      y={y}
-      width={width}
-      height={height + height / 4}
-    />
-  );
-};
-const dayWeek: Record<number, string> = {
-  1: 'L',
-  2: 'M',
-  3: 'M',
-  4: 'J',
-  5: 'V',
-  6: 'S',
-  7: 'D',
-};
 const SessionChart: React.FC = (): JSX.Element => {
   const { state } = useFetch<AverageSessionData>(
     authorizedId.cecilia,
@@ -111,7 +75,7 @@ const SessionChart: React.FC = (): JSX.Element => {
             panose1: 10,
           }}
           opacity={0.6}
-          tickFormatter={(index) => dayWeek[index]}
+          tickFormatter={adapterDayLabel}
         />
         <Tooltip
           itemStyle={{ color: 'black' }}
@@ -127,6 +91,7 @@ const SessionChart: React.FC = (): JSX.Element => {
           stroke="url(#colorUv)"
           strokeWidth={2}
           fill="transparent"
+          strokeLinejoin="round"
           activeDot={{
             r: 6,
             fill: 'white',
