@@ -3,11 +3,11 @@ import type React from 'react';
 import type { KpiProps } from '../types/kpi';
 import { useUser } from '../contexts/UserContext';
 import KpiCard from '../components/UI/kpi/KpiCard';
-import { adaptaterKpis } from '../adaptaters/adapterKpis';
+import { adapterKpis } from '../adapters/adapterKpis';
 
 const KpiCards: React.FC = (): JSX.Element => {
   const data = useUser();
-  const kpis = adaptaterKpis(data?.keyData ?? null);
+  const kpis = adapterKpis(data?.keyData ?? null);
 
   return (
     <>
