@@ -1,9 +1,10 @@
+export type Status = 'idle' | 'loading' | 'done' | 'fail';
+
 export type FetchState<T> = {
   data: T | null;
-  status: string;
+  status: Status;
   error: string | null;
 };
-
 export type FetchAction<T> =
   | { type: 'FETCH_INIT' }
   | { type: 'FETCH_SUCCESS'; payload: T }
