@@ -5,14 +5,19 @@ import {
   ResponsiveContainer,
   PolarAngleAxis,
 } from 'recharts';
+import { useUser } from '../../../contexts/UserContext';
 
 interface ScoreData {
-  uv: number;
+  score: number | undefined;
   fill: string;
 }
 
-const data: ScoreData[] = [{ uv: 12, fill: '#e60000' }];
 const ScoreChart: React.FC = (): JSX.Element => {
+  const data = useUser();
+  const rawScore = data?.score ?? data?.todayScore ?? 0;
+  const userScore = Math.round(rawScore * 100);
+  const score: ScoreData[] = [{ score: userScore, fill: '#e60000' }];
+
   return (
     <>
       <h3 className="absolute m-3 font-semibold">Score</h3>
@@ -21,7 +26,7 @@ const ScoreChart: React.FC = (): JSX.Element => {
           innerRadius="70%"
           outerRadius="80%"
           barSize={15}
-          data={data}
+          data={score}
           startAngle={90}
           endAngle={450}
           cx="50%"
@@ -34,15 +39,15 @@ const ScoreChart: React.FC = (): JSX.Element => {
             tick={false}
           />
           <RadialBar
-            dataKey="uv"
+            dataKey="score"
             angleAxisId={0}
-            data={[data[0]]}
+            data={[score[0]]}
             cornerRadius={10}
           />
         </RadialBarChart>
       </ResponsiveContainer>
       <div className="absolute top-[42%] left-[42%] text-center">
-        <span className="text-[26px] font-bold">{data[0].uv} %</span>
+        <span className="text-[26px] font-bold">{score[0].score} %</span>
         <br />
         <span className="text-gray">
           de votre
