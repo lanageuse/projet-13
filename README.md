@@ -12,8 +12,7 @@ Tableau de bord d’analytics
 1. **Cloner le projet**
 
 ```bash
-git clone <url-du-repo>
-cd projet-13
+git clone https://github.com/lanageuse/projet-13
 ```
 
 2. **Installer les dépendances**
@@ -41,6 +40,17 @@ VITE_USER_ID=12
 ```bash
 npm run dev
 # ou
+yarn dev
+```
+
+5. **Lancer le backend**
+
+```bash
+git clone https://github.com/OpenClassrooms-Student-Center/SportSee
+```
+
+```bash
+yarn
 yarn dev
 ```
 
