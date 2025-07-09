@@ -37,10 +37,12 @@ const PerformanceChart: React.FC = () => {
   const { data } = state;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <RadarChart
         data={adaptedPerformanceData(data)}
-        margin={{ left: 10, right: 20, top: 10, bottom: 10 }}
+        cx="50%"
+        cy="50%"
+        outerRadius="65%"
       >
         {/* Grille polaire pour structurer le graphique */}
         <PolarGrid />
