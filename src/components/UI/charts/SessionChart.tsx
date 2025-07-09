@@ -21,7 +21,7 @@ const SessionChart: React.FC = () => {
   const { data } = state;
   const averageSessionData = data?.sessions;
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <AreaChart
         data={averageSessionData}
         margin={{
