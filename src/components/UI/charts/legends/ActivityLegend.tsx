@@ -14,12 +14,12 @@ export const CustomActivityLegend = (props: ActivityLegend) => {
   // Pas d'affichage si ale payload n'est pas fourni
   if (!payload || payload.length === 0) return null;
   return (
-    <div className="flex flex-col-reverse flex-wrap justify-between gap-3 md:flex-row-reverse">
+    <div className="flex flex-col-reverse flex-wrap justify-between gap-1 md:flex-row-reverse md:gap-3">
       <div className="flex w-full items-center justify-center gap-3 md:w-fit">
         {payload?.map((item: LegendPayloadItem, index: number) => (
-          <div key={index} className="gap-1text-sm flex items-center gap-1">
+          <div key={index} className="gap-1text-sm flex gap-1">
             <span
-              style={{ backgroundColor: item.color }}
+              style={{ backgroundColor: item.color, marginTop: '7px' }}
               className="inline-block h-2 w-2 rounded-2xl"
             />
             {item.value}
