@@ -49,17 +49,6 @@ const ActivityChart: React.FC = () => {
           content={<CustomActivityLegend />}
         />
 
-        {/* Titre du graphique */}
-        <text
-          x={70}
-          y={20}
-          fill="black"
-          textAnchor="middle"
-          dominantBaseline="central"
-        >
-          <tspan fontSize="15">Activité quotidienne</tspan>
-        </text>
-
         {/* Axe X affichant les numéros de jour (1, 2, 3...) */}
         <XAxis
           dataKey="day"
