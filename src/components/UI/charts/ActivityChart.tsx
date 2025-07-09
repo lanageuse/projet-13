@@ -45,7 +45,7 @@ const ActivityChart: React.FC = () => {
           align="right"
           iconType="circle"
           iconSize={8}
-          height={60}
+          height={65}
           content={<CustomActivityLegend />}
         />
 
