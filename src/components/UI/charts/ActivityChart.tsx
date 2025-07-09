@@ -34,7 +34,7 @@ const ActivityChart: React.FC = () => {
   const activityData = data?.sessions;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" minHeight={320}>
       <BarChart data={activityData}>
         {/* Grille cartésienne avec lignes horizontales uniquement */}
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
