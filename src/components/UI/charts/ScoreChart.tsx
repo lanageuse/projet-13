@@ -27,7 +27,7 @@ const ScoreChart: React.FC = () => {
     <>
       <h3 className="absolute m-3 font-semibold">Score</h3>
 
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minHeight={300}>
         <RadialBarChart
           innerRadius="70%"
           outerRadius="80%"
