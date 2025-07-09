@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../../assets/logo-sportsee.svg';
 
 /**
@@ -12,6 +12,22 @@ const Header: React.FC = () => {
   // Liste des éléments de navigation
   const items: string[] = ['Accueil', 'Profil', 'Réglage', 'Communauté'];
   const [isOpened, setIsOpened] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isNowDesktop = window.innerWidth >= 1024;
+      setIsDesktop(isNowDesktop);
+
+      // Ferme le menu dès qu’on passe en mobile
+      if (!isNowDesktop) {
+        setIsOpened(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header className="relative z-50 bg-black">
@@ -51,7 +67,9 @@ const Header: React.FC = () => {
             </svg>
           </button>
           <div
-            className={`${isOpened ? 'hidden' : ''} min-w-full md:min-w-auto md:flex-3/4`}
+            className={`${
+              isDesktop || isOpened ? 'block' : 'hidden'
+            } min-w-full md:min-w-auto md:flex-3/4`}
             id="navbar-default"
           >
             <ul className="mt-4 flex flex-col p-4 font-medium md:mt-0 md:flex-row md:justify-around md:space-x-8 md:p-0 rtl:space-x-reverse">
