@@ -28,14 +28,15 @@ const PerformanceChart: React.FC = () => {
    * Récupération des données de performance via le hook useFetch
    * @type {FetchState<PerformanceData>}
    */
-  const { state } = useFetch<PerformanceData>(ApiEndpoints.UserPerformance);
-
+  const { state } = useFetch<PerformanceData>(
+    ApiEndpoints.UserPerformance,
+    true
+  );
   /**
    * Extraction des données de performance depuis l'état
    * @type {PerformanceData | null}
    */
   const { data } = state;
-
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <RadarChart

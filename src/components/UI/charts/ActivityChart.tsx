@@ -27,7 +27,7 @@ import { CustomActivityTooltip } from './tooltips/ActivityTooltip';
  */
 const ActivityChart: React.FC = () => {
   /** Récupération des données d'activité via l'API */
-  const { state } = useFetch<ActivityData>(ApiEndpoints.UserActivity);
+  const { state } = useFetch<ActivityData>(ApiEndpoints.UserActivity, true);
   const { data } = state;
 
   /** Sessions d'activité extraites des données API */

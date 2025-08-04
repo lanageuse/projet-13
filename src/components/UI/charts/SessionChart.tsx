@@ -16,7 +16,8 @@ import { adapterDayLabel } from '../../../adapters/adaptersSession';
 
 const SessionChart: React.FC = () => {
   const { state } = useFetch<AverageSessionData>(
-    ApiEndpoints.UserAverageSessions
+    ApiEndpoints.UserAverageSessions,
+    true
   );
   const { data } = state;
   const averageSessionData = data?.sessions;
