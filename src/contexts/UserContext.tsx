@@ -11,7 +11,7 @@ const UserContext = createContext<UserData | null>(null);
  * @returns {JSX.Element} Provider du contexte utilisateur
  */
 export const UserProvider = ({ children }: React.PropsWithChildren) => {
-  const { state } = useFetch<UserData>(ApiEndpoints.User);
+  const { state } = useFetch<UserData>(ApiEndpoints.User, true);
   const { data } = state;
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 };
