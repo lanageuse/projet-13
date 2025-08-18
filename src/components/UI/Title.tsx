@@ -10,7 +10,7 @@ const Title: React.FC = () => {
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-5xl font-bold text-black">
-        Bonjour <span className="text-red">{data?.userInfos.firstName}</span>
+        Bonjour <span className="text-red">{data?.getWelcomeMessage()}</span>
       </h1>
       <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
     </div>
