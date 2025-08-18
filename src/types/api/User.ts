@@ -65,13 +65,13 @@ export type UserData = {
   };
 };
 
-export type keyData = {
+export type kpiData = {
   /** Nombre de calories quotidiennes */
-  calorieCount: number;
+  calories: string;
   /** Apport quotidien en protéines (en grammes) */
-  proteinCount: number;
+  proteines: string;
   /** Apport quotidien en glucides (en grammes) */
-  carbohydrateCount: number;
+  glucides: string;
   /** Apport quotidien en lipides (en grammes) */
-  lipidCount: number;
+  lipides: string;
 };
