@@ -30,3 +30,19 @@ export type AverageSessionData = {
   /** Liste des sessions moyennes par jour de la semaine */
   sessions: AverageSession[];
 };
+
+/**
+ * Interface pour les données de session brutes
+ */
+export type RawSessionData = {
+  day: number;
+  sessionLength: number;
+};
+
+/**
+ * Interface pour les données de session formatées
+ */
+export type FormattedSessionData = {
+  day: string;
+  sessionLength: number;
+};
