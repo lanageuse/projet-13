@@ -2,7 +2,7 @@ import type React from 'react';
 import type { KpiProps } from '../types/kpi';
 import { useUser } from '../contexts/UserContext';
 import KpiCard from '../components/UI/kpi/KpiCard';
-import { adapterKpis } from '../adapters/adapterKpis';
+import { Kpis } from '../class/Kpis';
 
 /**
  * Affiche la liste des cartes KPI de l'utilisateur.
@@ -10,7 +10,8 @@ import { adapterKpis } from '../adapters/adapterKpis';
  */
 const KpiCards: React.FC = () => {
   const data = useUser();
-  const kpis = adapterKpis(data?.keyData ?? null);
+  const kpiData = new Kpis(data?.kpis ?? null);
+  const kpis = kpiData.kpis;
 
   return (
     <>
