@@ -8,11 +8,11 @@ export class User {
   public readonly lastName: string;
   public readonly age: number;
   public readonly score: number;
-  public readonly nutrition: {
+  public readonly kpis: {
     calories: string;
-    proteins: string;
-    carbohydrates: string;
-    lipids: string;
+    proteines: string;
+    glucides: string;
+    lipides: string;
   };
   constructor(data: UserData) {
     this.id = data.id;
@@ -27,11 +27,11 @@ export class User {
     this.score = data.todayScore ?? data.score ?? 0;
 
     // Formatage des données nutritionnelles avec unités
-    this.nutrition = {
-      calories: `${data.keyData.calorieCount.toLocaleString()}kCal`,
-      proteins: `${data.keyData.proteinCount}g`,
-      carbohydrates: `${data.keyData.carbohydrateCount}g`,
-      lipids: `${data.keyData.lipidCount}g`,
+    this.kpis = {
+      calories: `${data.keyData.calorieCount}`,
+      proteines: `${data.keyData.proteinCount}`,
+      glucides: `${data.keyData.carbohydrateCount}`,
+      lipides: `${data.keyData.lipidCount}`,
     };
   }
   /**
@@ -54,29 +54,5 @@ export class User {
    */
   getWelcomeMessage(): string {
     return `${this.firstName}`;
-  }
-  /**
-   * Retourne le nombre de calories
-   */
-  getCalories(): string {
-    return this.nutrition.calories;
-  }
-  /**
-   * Retourne le nombre de protéines
-   */
-  getProteins(): string {
-    return this.nutrition.proteins;
-  }
-  /**
-   * Retourne le nombre de carboHydrate
-   */
-  getCarbohydrates(): string {
-    return this.nutrition.carbohydrates;
-  }
-  /**
-   * Retourne le nombre de lipides
-   */
-  getLipids(): string {
-    return this.nutrition.lipids;
   }
 }
