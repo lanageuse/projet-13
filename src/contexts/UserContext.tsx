@@ -2,8 +2,9 @@ import { createContext, useContext } from 'react';
 import useFetch from '../hooks/useFetch';
 import { ApiEndpoints } from '../types/api/endpoints';
 import { type UserData } from '../types/api/user';
+import { User } from '../class/User';
 
-const UserContext = createContext<UserData | null>(null);
+const UserContext = createContext<User | null>(null);
 
 /**
  * Fournit les données utilisateur à tous les composants enfants via le contexte React.
@@ -13,12 +14,17 @@ const UserContext = createContext<UserData | null>(null);
 export const UserProvider = ({ children }: React.PropsWithChildren) => {
   const { state } = useFetch<UserData>(ApiEndpoints.User, true);
   const { data } = state;
-  return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
+  const formattedUserData = data ? new User(data) : null;
+  return (
+    <UserContext.Provider value={formattedUserData}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 /**
  * Hook personnalisé pour accéder au contexte utilisateur.
- * @returns {UserData|null} Données utilisateur ou null si non chargées
+ * @returns {User|null} Données utilisateur ou null si non chargées
  * @throws {Error} Si utilisé en dehors du UserProvider
  */
 // eslint-disable-next-line react-refresh/only-export-components
