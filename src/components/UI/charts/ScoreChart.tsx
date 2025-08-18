@@ -5,7 +5,6 @@ import {
   PolarAngleAxis,
 } from 'recharts';
 import { useUser } from '../../../contexts/UserContext';
-import type { ScoreData } from '../../../types/charts/scoreData';
 
 /**
  * Composant graphique circulaire qui affiche le score de l'utilisateur.
@@ -16,12 +15,8 @@ import type { ScoreData } from '../../../types/charts/scoreData';
 const ScoreChart: React.FC = () => {
   const data = useUser();
 
-  // Score brut (0-1) converti en pourcentage
-  const rawScore = data?.score ?? data?.todayScore ?? 0;
-  const userScore = Math.round(rawScore * 100);
-
   // Données pour le graphique Recharts
-  const score: ScoreData[] = [{ score: userScore, fill: '#e60000' }];
+  const rawChartData = data?.getScoreChartsData();
 
   return (
     <>
@@ -32,7 +27,7 @@ const ScoreChart: React.FC = () => {
           innerRadius="70%"
           outerRadius="80%"
           barSize={15}
-          data={score}
+          data={rawChartData}
           startAngle={90}
           endAngle={450}
           cx="50%"
@@ -46,9 +41,9 @@ const ScoreChart: React.FC = () => {
           />
 
           <RadialBar
-            dataKey="score"
+            dataKey="percent"
             angleAxisId={0}
-            data={[score[0]]}
+            data={rawChartData}
             cornerRadius={10}
           />
         </RadialBarChart>
@@ -56,7 +51,9 @@ const ScoreChart: React.FC = () => {
 
       {/* Affichage du pourcentage centré */}
       <div className="absolute top-[42%] left-[42%] text-center">
-        <span className="text-[26px] font-bold">{score[0].score} %</span>
+        <span className="text-[26px] font-bold">
+          {data?.getScorePercentage()}
+        </span>
         <br />
         <span className="text-gray">
           de votre
