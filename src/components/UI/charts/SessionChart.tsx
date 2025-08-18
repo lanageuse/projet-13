@@ -12,7 +12,7 @@ import { ApiEndpoints } from '../../../types/api/endpoints';
 import type { AverageSessionData } from '../../../types/api/session';
 import { CustomSessionTooltip } from './tooltips/SessionTooltip';
 import { CustomCursor } from './cursor/CursorSession';
-import { adapterDayLabel } from '../../../adapters/adaptersSession';
+import { Session } from '../../../class/Session';
 
 const SessionChart: React.FC = () => {
   const { state } = useFetch<AverageSessionData>(
@@ -20,11 +20,14 @@ const SessionChart: React.FC = () => {
     true
   );
   const { data } = state;
-  const averageSessionData = data?.sessions;
+  const formattedSessionData = data?.sessions
+    ? new Session(data?.sessions).formatSessions()
+    : [];
+
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <AreaChart
-        data={averageSessionData}
+        data={formattedSessionData}
         margin={{
           top: 0,
           right: 0,
@@ -73,7 +76,6 @@ const SessionChart: React.FC = () => {
             panose1: 10,
           }}
           opacity={0.6}
-          tickFormatter={adapterDayLabel}
         />
         <Tooltip
           itemStyle={{ color: 'black' }}
