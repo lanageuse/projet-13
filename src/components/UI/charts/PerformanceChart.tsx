@@ -8,7 +8,7 @@ import {
 import useFetch from '../../../hooks/useFetch';
 import type { PerformanceData } from '../../../types/api/performance';
 import { ApiEndpoints } from '../../../types/api/endpoints';
-import { adaptedPerformanceData } from '../../../adapters/adpaterPerformance';
+import { Performance } from '../../../models/Performance';
 
 /**
  * Composant graphique radar affiche les données de performance d'un utilisateur.
@@ -37,14 +37,11 @@ const PerformanceChart: React.FC = () => {
    * @type {PerformanceData | null}
    */
   const { data } = state;
+  const performance = new Performance(data);
+  const adaptedData = performance.adaptPerformanceData();
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-      <RadarChart
-        data={adaptedPerformanceData(data)}
-        cx="50%"
-        cy="50%"
-        outerRadius="65%"
-      >
+      <RadarChart data={adaptedData} cx="50%" cy="50%" outerRadius="65%">
         {/* Grille polaire pour structurer le graphique */}
         <PolarGrid />
 

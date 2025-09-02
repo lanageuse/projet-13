@@ -12,7 +12,7 @@ import { ApiEndpoints } from '../../../types/api/endpoints';
 import type { AverageSessionData } from '../../../types/api/session';
 import { CustomSessionTooltip } from './tooltips/SessionTooltip';
 import { CustomCursor } from './cursor/CursorSession';
-import { Session } from '../../../class/Session';
+import { Session } from '../../../models/Session';
 
 const SessionChart: React.FC = () => {
   const { state } = useFetch<AverageSessionData>(

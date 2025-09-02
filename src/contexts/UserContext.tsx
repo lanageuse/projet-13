@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import useFetch from '../hooks/useFetch';
 import { ApiEndpoints } from '../types/api/endpoints';
 import { type UserData } from '../types/api/user';
-import { User } from '../class/User';
+import { User } from '../models/User';
 
 const UserContext = createContext<User | null>(null);
 
