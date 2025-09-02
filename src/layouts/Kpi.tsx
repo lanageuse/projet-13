@@ -2,7 +2,7 @@ import type React from 'react';
 import type { KpiProps } from '../types/kpi';
 import { useUser } from '../contexts/UserContext';
 import KpiCard from '../components/UI/kpi/KpiCard';
-import { Kpis } from '../class/Kpis';
+import { Kpis } from '../models/Kpis';
 
 /**
  * Affiche la liste des cartes KPI de l'utilisateur.
