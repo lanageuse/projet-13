@@ -1,5 +1,5 @@
 // src/contexts/DashboardContext.tsx
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 import useFetch from '../hooks/useFetch';
 import {ApiEndpoints} from '../types/apis'
 import type { ActivityData, PerformanceData, AverageSessionData, UserData } from '../types/apis';
@@ -50,19 +50,31 @@ export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
   const sessionsData = useFetch<AverageSessionData>(ApiEndpoints.UserAverageSessions);
   const performanceData = useFetch<PerformanceData>(ApiEndpoints.UserPerformance);
 
-  /*Application des modèles pour transformer les données de l'API */
+  /*Application des modèles pour transformer les données de l'API avec mémoisation */
   
-  const user = userData.state.data ? new User(userData.state.data) : null;
+  const user = useMemo(
+    () => userData.state.data ? new User(userData.state.data) : null,
+    [userData.state.data]
+  );
   
-  const formattedSessions = sessionsData.state.data?.sessions 
-    ? new Session(sessionsData.state.data.sessions).formatSessions() 
-    : null;
+  const formattedSessions = useMemo(
+    () => sessionsData.state.data?.sessions 
+      ? new Session(sessionsData.state.data.sessions).formatSessions() 
+      : null,
+    [sessionsData.state.data?.sessions]
+  );
   
-  const formattedPerformance = performanceData.state.data
-    ? new Performance(performanceData.state.data).adaptPerformanceData()
-    : null;
+  const formattedPerformance = useMemo(
+    () => performanceData.state.data
+      ? new Performance(performanceData.state.data).adaptPerformanceData()
+      : null,
+    [performanceData.state.data]
+  );
   
-  const kpis = user ? new Kpis(user.kpis) : null;
+  const kpis = useMemo(
+    () => user ? new Kpis(user.kpis) : null,
+    [user]
+  );
 
   /**
    * Calcul des états pour chaque fetch
@@ -77,18 +89,21 @@ export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
     .map(({ state }) => state.error)
     .filter((error): error is string => error !== null);
 
-  const value: DashboardContextValue = {
-    // Données formatées
-    user,
-    activitySessions: activityData.state.data?.sessions || null,
-    formattedSessions,
-    formattedPerformance,
-    kpis,
-    // États
-    isLoading,
-    hasError,
-    errors,
-  };
+  const value: DashboardContextValue = useMemo(
+    () => ({
+      // Données formatées
+      user,
+      activitySessions: activityData.state.data?.sessions || null,
+      formattedSessions,
+      formattedPerformance,
+      kpis,
+      // États
+      isLoading,
+      hasError,
+      errors,
+    }),
+    [user, activityData.state.data?.sessions, formattedSessions, formattedPerformance, kpis, isLoading, hasError, errors]
+  );
 
   return (
     <DashboardContext.Provider value={value}>
