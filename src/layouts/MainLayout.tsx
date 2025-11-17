@@ -2,22 +2,24 @@ import ActivityChart from '../components/charts/ActivityChart';
 import PerformanceChart from '../components/charts/PerformanceChart';
 import ScoreChart from '../components/charts/ScoreChart';
 import SessionChart from '../components/charts/SessionChart';
-import Header from '../layouts/Header';
-import SideBar from '../layouts/SideBar';
-import Title from '../layouts/Title';
+import Header from './Header';
+import SideBar from './SideBar';
+import Title from './Title';
 import KpiList from '../components/kpi/KpiList';
+import { DashboardStatus } from '../components/DashboardStatus';
 
 /**
  * Mise en page principale de l'application SportSee.
  * Affiche l'en-tête, la barre latérale, les graphiques et les KPI.
  * @returns {JSX.Element} Structure principale de la page d'accueil
  */
-function Main() {
+function MainLayout() {
   return (
     <div className="flex-grow">
       <Header />
       <div className="flex flex-row">
         <SideBar />
+        <DashboardStatus>
         <div className="flex w-full flex-col gap-8 px-6 py-6 sm:ml-32 lg:px-24 lg:py-16">
           <Title />
           <div className="flex flex-col gap-8 xl:flex-row">
@@ -42,9 +44,10 @@ function Main() {
             </div>
           </div>
         </div>
+        </DashboardStatus>
       </div>
     </div>
   );
 }
 
-export default Main;
+export default MainLayout;

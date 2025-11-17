@@ -1,11 +1,11 @@
-import Main from '../layouts/Main';
+import MainLayout from '../layouts/MainLayout';
 
 /**
  * Page d'accueil de l'application.
  * @returns {JSX.Element} Composant principal de la page d'accueil
  */
 function DashBoard() {
-  return <Main />;
+  return <MainLayout />;
 }
 
 export default DashBoard;
