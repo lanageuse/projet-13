@@ -1,11 +1,11 @@
-import ActivityChart from '../components/UI/charts/ActivityChart';
-import PerformanceChart from '../components/UI/charts/PerformanceChart';
-import ScoreChart from '../components/UI/charts/ScoreChart';
-import SessionChart from '../components/UI/charts/SessionChart';
-import Header from '../components/UI/Header';
-import SideBar from '../components/UI/SideBar';
-import Title from '../components/UI/Title';
-import KpiCards from './Kpi';
+import ActivityChart from '../components/charts/ActivityChart';
+import PerformanceChart from '../components/charts/PerformanceChart';
+import ScoreChart from '../components/charts/ScoreChart';
+import SessionChart from '../components/charts/SessionChart';
+import Header from '../layouts/Header';
+import SideBar from '../layouts/SideBar';
+import Title from '../layouts/Title';
+import KpiList from '../components/kpi/KpiList';
 
 /**
  * Mise en page principale de l'application SportSee.
@@ -38,7 +38,7 @@ function Main() {
               </div>
             </div>
             <div className="flex flex-1/4 flex-col gap-10">
-              <KpiCards />
+              <KpiList />
             </div>
           </div>
         </div>
