@@ -3,14 +3,14 @@
  * Fournit le contexte utilisateur à toute l'application.
  */
 
-import { UserProvider } from './contexts/UserContext';
+import { DashboardProvider } from './contexts/DashboardContext';
 import Home from './pages/Home';
 
 function App() {
   return (
-    <UserProvider>
+    <DashboardProvider>
       <Home />
-    </UserProvider>
+    </DashboardProvider>
   );
 }
 
