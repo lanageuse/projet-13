@@ -8,13 +8,63 @@ import {
   ResponsiveContainer,
   YAxis,
 } from 'recharts';
-import { CustomActivityLegend } from './legends/ActivityLegend';
-import { CustomActivityTooltip } from './tooltips/ActivityTooltip';
-import { useDashboard } from '../../../contexts/DashboardContext';
+import { useDashboard } from '../../contexts/DashboardContext';
+import type { ChartLegendProps, ChartTooltipProps, LegendItem } from '../../types/ui';
+
+/**
+ * Légende personnalisée pour le graphique d'activité.
+ * Composant interne utilisé uniquement par ActivityChart.
+ */
+const ActivityLegend = (props: ChartLegendProps) => {
+  const { payload } = props;
+
+  // Pas d'affichage si ale payload n'est pas fourni
+  if (!payload || payload.length === 0) return null;
+  return (
+    <div className="flex flex-col-reverse flex-wrap justify-between gap-1 md:flex-row-reverse md:gap-3">
+      <div className="flex w-full items-center justify-center gap-3 md:w-fit">
+        {payload?.map((item: LegendItem, index: number) => (
+          <div key={index} className="gap-1text-sm flex gap-1">
+            <span
+              style={{ backgroundColor: item.color, marginTop: '7px' }}
+              className="inline-block h-2 w-2 rounded-2xl"
+            />
+            {item.value}
+          </div>
+        ))}
+      </div>
+      <div className="w-full text-center text-[15px] font-medium md:w-fit md:text-left">
+        Activité quotidienne
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Infobulle personnalisée pour le graphique d'activité.
+ * Composant interne utilisé uniquement par ActivityChart.
+ */
+const ActivityTooltip = ({ active, payload }: ChartTooltipProps) => {
+  const isVisible = active && payload && payload.length;
+  return (
+    <div
+      className="bg-red p-2 text-sm text-white"
+      style={{ visibility: isVisible ? 'visible' : 'hidden' }}
+    >
+      {isVisible && (
+        <>
+          <p className="py-3">{`${payload[0].value} kg`}</p>
+          <p className="py-3">{`${payload[1].value} Kcal`}</p>
+        </>
+      )}
+    </div>
+  );
+};
+
+
 
 /**
  * Composant graphique affichant l'activité quotidienne d'un utilisateur
- * {@link : https://recharts.org/en-US}
  * Ce composant utilise un graphique en barres pour visualiser :
  * - Le poids quotidien (en kg) sur l'axe Y de droite
  * - Les calories brûlées (en kCal) sur l'axe Y de gauche
@@ -38,7 +88,7 @@ const ActivityChart: React.FC = () => {
           iconType="circle"
           iconSize={8}
           height={65}
-          content={<CustomActivityLegend />}
+          content={<ActivityLegend />}
         />
 
         {/* Axe X affichant les numéros de jour (1, 2, 3...) */}
@@ -68,7 +118,7 @@ const ActivityChart: React.FC = () => {
         />
 
         {/* Tooltip personnalisé avec tri inversé */}
-        <Tooltip itemSorter={() => -1} content={<CustomActivityTooltip />} />
+        <Tooltip itemSorter={() => -1} content={<ActivityTooltip />} />
 
         {/* Barre pour le poids (kg) - axe de droite */}
         <Bar

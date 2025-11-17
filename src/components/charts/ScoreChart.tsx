@@ -4,7 +4,7 @@ import {
   ResponsiveContainer,
   PolarAngleAxis,
 } from 'recharts';
-import { useDashboard } from '../../../contexts/DashboardContext';
+import { useDashboard } from '../../contexts/DashboardContext';
 
 /**
  * Composant graphique circulaire qui affiche le score de l'utilisateur.

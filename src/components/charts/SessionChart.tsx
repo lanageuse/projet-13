@@ -6,10 +6,47 @@ import {
   Tooltip,
   ResponsiveContainer,
   YAxis,
+  Rectangle
 } from 'recharts';
-import { CustomSessionTooltip } from './tooltips/SessionTooltip';
-import { CustomCursor } from './cursor/CursorSession';
-import { useDashboard } from '../../../contexts/DashboardContext';
+import { useDashboard } from '../../contexts/DashboardContext';
+import type { ChartCursorProps, ChartTooltipProps } from '../../types/ui';
+
+
+
+const SessionTooltip = ({ active, payload }: ChartTooltipProps) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white p-3 text-xs font-bold text-black">
+        {`${payload[0].value} min`}
+      </div>
+    );
+  }
+  return null;
+};
+
+const SessionCursor: React.FC<ChartCursorProps> = ({
+  points,
+  width = 0,
+  height = 0,
+}) => {
+  // Pas d'affichage si aucun point fourni
+  if (!points || points.length === 0) return null;
+
+  // Utilise le premier point pour la position
+  const { x, y } = points[0];
+
+  return (
+    <Rectangle
+      fill="rgba(0,0,0,0.3)"
+      x={x}
+      y={y}
+      width={width}
+      height={height + height / 4} // Hauteur étendue de 25%
+    />
+  );
+};
+
+
 
 const SessionChart: React.FC = () => {
   const { formattedSessions } = useDashboard();
@@ -70,8 +107,8 @@ const SessionChart: React.FC = () => {
         <Tooltip
           itemStyle={{ color: 'black' }}
           contentStyle={{ border: 0 }}
-          cursor={<CustomCursor points={[]} />}
-          content={<CustomSessionTooltip />}
+          cursor={<SessionCursor points={[]} />}
+          content={<SessionTooltip />}
         />
         <Area
           type="monotone"

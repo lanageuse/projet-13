@@ -5,7 +5,7 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from 'recharts';
-import { useDashboard } from '../../../contexts/DashboardContext';
+import { useDashboard } from '../../contexts/DashboardContext';
 
 /**
  * Composant graphique radar affiche les données de performance d'un utilisateur.
@@ -13,10 +13,6 @@ import { useDashboard } from '../../../contexts/DashboardContext';
  * Ce composant utilise Recharts pour créer un graphique radar interactif qui visualise
  * les différents types de performance (cardio, énergie, endurance, force, vitesse, intensité).
  * Les données sont récupérées via l'API et adaptées pour l'affichage.
- * {@link : https://recharts.org/en-US}
- *
- * @component
- * @example
  *
  * @returns {JSX.Element} Un graphique radar responsive affichant les performances utilisateur
  */
