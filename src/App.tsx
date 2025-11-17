@@ -4,12 +4,12 @@
  */
 
 import { DashboardProvider } from './contexts/DashboardContext';
-import Home from './pages/Home';
+import DashBoard from './pages/Dashboard';
 
 function App() {
   return (
     <DashboardProvider>
-      <Home />
+      <DashBoard />
     </DashboardProvider>
   );
 }
