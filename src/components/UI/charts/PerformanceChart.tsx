@@ -5,10 +5,7 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from 'recharts';
-import useFetch from '../../../hooks/useFetch';
-import type { PerformanceData } from '../../../types/api/performance';
-import { ApiEndpoints } from '../../../types/api/endpoints';
-import { Performance } from '../../../models/Performance';
+import { useDashboard } from '../../../contexts/DashboardContext';
 
 /**
  * Composant graphique radar affiche les données de performance d'un utilisateur.
@@ -24,27 +21,12 @@ import { Performance } from '../../../models/Performance';
  * @returns {JSX.Element} Un graphique radar responsive affichant les performances utilisateur
  */
 const PerformanceChart: React.FC = () => {
-  /**
-   * Récupération des données de performance via le hook useFetch
-   * @type {FetchState<PerformanceData>}
-   */
-  const { state } = useFetch<PerformanceData>(
-    ApiEndpoints.UserPerformance,
-    true
-  );
-  /**
-   * Extraction des données de performance depuis l'état
-   * @type {PerformanceData | null}
-   */
-  const { data } = state;
-  const performance = new Performance(data);
-  const adaptedData = performance.adaptPerformanceData();
+  const {formattedPerformance} = useDashboard()
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-      <RadarChart data={adaptedData} cx="50%" cy="50%" outerRadius="65%">
+      <RadarChart data={formattedPerformance || []} cx="50%" cy="50%" outerRadius="65%">
         {/* Grille polaire pour structurer le graphique */}
         <PolarGrid />
-
         {/* Axe des angles avec les labels des types de performance */}
         <PolarAngleAxis
           dataKey="kindLabel"

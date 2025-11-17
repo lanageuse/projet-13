@@ -4,7 +4,7 @@ import {
   ResponsiveContainer,
   PolarAngleAxis,
 } from 'recharts';
-import { useUser } from '../../../contexts/UserContext';
+import { useDashboard } from '../../../contexts/DashboardContext';
 
 /**
  * Composant graphique circulaire qui affiche le score de l'utilisateur.
@@ -13,10 +13,10 @@ import { useUser } from '../../../contexts/UserContext';
  * @returns {JSX.Element} Graphique radial avec le pourcentage d'objectif atteint
  */
 const ScoreChart: React.FC = () => {
-  const data = useUser();
+  const {user} = useDashboard();
 
   // Données pour le graphique Recharts
-  const rawChartData = data?.getScoreChartsData();
+  const rawChartData = user?.getScoreChartsData();
 
   return (
     <>
@@ -52,7 +52,7 @@ const ScoreChart: React.FC = () => {
       {/* Affichage du pourcentage centré */}
       <div className="absolute top-[42%] left-[42%] text-center">
         <span className="text-[26px] font-bold">
-          {data?.getScorePercentage()}
+          {user?.getScorePercentage()}
         </span>
         <br />
         <span className="text-gray">

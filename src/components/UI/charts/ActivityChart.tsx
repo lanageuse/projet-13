@@ -8,11 +8,9 @@ import {
   ResponsiveContainer,
   YAxis,
 } from 'recharts';
-import useFetch from '../../../hooks/useFetch';
-import { ApiEndpoints } from '../../../types/api/endpoints';
-import type { ActivityData } from '../../../types/api/activity';
 import { CustomActivityLegend } from './legends/ActivityLegend';
 import { CustomActivityTooltip } from './tooltips/ActivityTooltip';
+import { useDashboard } from '../../../contexts/DashboardContext';
 
 /**
  * Composant graphique affichant l'activité quotidienne d'un utilisateur
@@ -26,17 +24,11 @@ import { CustomActivityTooltip } from './tooltips/ActivityTooltip';
  *
  */
 const ActivityChart: React.FC = () => {
-  /** Récupération des données d'activité via l'API */
-  const { state } = useFetch<ActivityData>(ApiEndpoints.UserActivity, true);
-  const { data } = state;
-
-  /** Sessions d'activité extraites des données API */
-  const activityData = data?.sessions;
-
+  const {activitySessions} = useDashboard()
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={320}>
-      <BarChart data={activityData}>
-        {/* Grille cartésienne avec lignes horizontales uniquement */}
+      <BarChart data={activitySessions || []}>
+        {/* Grille avec lignes horizontales uniquement */}
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
         {/* Légende personnalisée positionnée en haut à droite */}

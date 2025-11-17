@@ -7,27 +7,17 @@ import {
   ResponsiveContainer,
   YAxis,
 } from 'recharts';
-import useFetch from '../../../hooks/useFetch';
-import { ApiEndpoints } from '../../../types/api/endpoints';
-import type { AverageSessionData } from '../../../types/api/session';
 import { CustomSessionTooltip } from './tooltips/SessionTooltip';
 import { CustomCursor } from './cursor/CursorSession';
-import { Session } from '../../../models/Session';
+import { useDashboard } from '../../../contexts/DashboardContext';
 
 const SessionChart: React.FC = () => {
-  const { state } = useFetch<AverageSessionData>(
-    ApiEndpoints.UserAverageSessions,
-    true
-  );
-  const { data } = state;
-  const formattedSessionData = data?.sessions
-    ? new Session(data?.sessions).formatSessions()
-    : [];
+  const { formattedSessions } = useDashboard();
 
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <AreaChart
-        data={formattedSessionData}
+        data={formattedSessions || []}
         margin={{
           top: 0,
           right: 0,
