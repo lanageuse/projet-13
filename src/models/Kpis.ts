@@ -1,4 +1,4 @@
-import type { kpiData } from '../types/api/user';
+import type { KpiData } from '../types/apis';
 import type { KpiProps } from '../types/kpi';
 import Calories from '../assets/icons/burn.svg?react';
 import Proteine from '../assets/icons/proteine.svg?react';
@@ -11,7 +11,7 @@ import Lipides from '../assets/icons/cheeseburger.svg?react';
 export class Kpis {
   public readonly kpis: KpiProps[];
 
-  constructor(kpis: kpiData | null) {
+  constructor(kpis: KpiData | null) {
     if (!kpis) {
       this.kpis = [];
       return;

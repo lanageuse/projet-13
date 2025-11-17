@@ -1,13 +1,13 @@
 import type {
-  AverageSession,
+  SessionItem,
   FormattedSessionData,
   RawSessionData,
-} from '../types/api/session';
+} from '../types/apis';
 
 export class Session {
   private rawSessions: RawSessionData[];
 
-  constructor(sessions: AverageSession[] | RawSessionData[]) {
+  constructor(sessions: SessionItem[] | RawSessionData[]) {
     this.rawSessions = sessions.map((session) => ({
       day:
         typeof session.day === 'string' ? parseInt(session.day) : session.day,

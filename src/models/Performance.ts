@@ -1,4 +1,4 @@
-import type { PerformanceData } from '../types/api/performance';
+import type { PerformanceData } from '../types/apis';
 
 /**
  * Interface pour les données de performance formatées

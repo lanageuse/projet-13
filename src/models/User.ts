@@ -1,4 +1,4 @@
-import { type UserData } from '../types/api/user';
+import { type UserData } from '../types/apis';
 import type { ScoreData } from '../types/charts/scoreData';
 
 export class User {
