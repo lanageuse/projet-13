@@ -10,31 +10,48 @@ import { Session } from '../models/Session';
 import { Performance } from '../models/Performance';
 import { Kpis } from '../models/Kpis';
 
-// Types pour les données formatées
+/**
+ * Interface définissant la structure des données exposées par le contexte Dashboard.
+ * Contient les données formatées prêtes à l'emploi ainsi que les états de chargement.
+ */
 interface DashboardContextValue {
-  // Données formatées uniquement
   user: User | null;
   activitySessions: ActivityData['sessions'] | null;
   formattedSessions: ReturnType<Session['formatSessions']> | null;
   formattedPerformance: ReturnType<Performance['adaptPerformanceData']> | null;
   kpis: Kpis | null;
   
-  // États global du state
   isLoading: boolean;
   hasError: boolean;
+
   errors: string[];
 }
 
+/**
+ * Contexte React pour centraliser l'accès aux données du tableau de bord.
+ * Undefined par défaut pour forcer l'utilisation du Provider.
+ */
 const DashboardContext = createContext<DashboardContextValue | undefined>(undefined);
 
+/**
+ * Provider du contexte Dashboard qui gère le fetching des données et leur formatage.
+ * Centralise tous les appels API nécessaires au tableau de bord et applique les modèles
+ * de données pour formater les réponses.
+ * 
+ * @param {React.PropsWithChildren} props - Les propriétés du composant
+ * @param {React.ReactNode} props.children - Les composants enfants qui auront accès au contexte
+ * @returns {JSX.Element} Le provider avec les données du contexte
+ * 
+ */
 export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
-  // Fetches centralisés
+  // Fetches centralisés vers les différents endpoints
   const userData = useFetch<UserData>(ApiEndpoints.User);
   const activityData = useFetch<ActivityData>(ApiEndpoints.UserActivity);
   const sessionsData = useFetch<AverageSessionData>(ApiEndpoints.UserAverageSessions);
   const performanceData = useFetch<PerformanceData>(ApiEndpoints.UserPerformance);
 
-  // Application des models pour formater les données
+  /*Application des modèles pour transformer les données de l'API */
+  
   const user = userData.state.data ? new User(userData.state.data) : null;
   
   const formattedSessions = sessionsData.state.data?.sessions 
@@ -47,7 +64,9 @@ export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
   
   const kpis = user ? new Kpis(user.kpis) : null;
 
-  // États globaux dérivés
+  /**
+   * Calcul des états pour chaque fetch
+   */
   const isLoading = [userData, activityData, sessionsData, performanceData]
     .some(({ state }) => state.status === 'loading');
   
@@ -78,6 +97,14 @@ export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
   );
 };
 
+/**
+ * Hook personnalisé pour accéder aux données du contexte Dashboard.
+ * Vérifie que le hook est utilisé dans le bon contexte et retourne les données.
+ * 
+ * @throws {Error} Lance une erreur si utilisé en dehors du DashboardProvider
+ * @returns {DashboardContextValue} Les données et états du tableau de bord
+ * 
+ */
 export const useDashboard = () => {
   const context = useContext(DashboardContext);
   if (!context) {
