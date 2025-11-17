@@ -50,7 +50,7 @@ function useFetch<T>(
   const builtEndpoint = useMemo(() => buildEndpoint(endPoint), [endPoint]);
 
   // Détermine si on utilise les données mockés ou le fetch api
-  const useMocks = import.meta.env.DEV; 
+const useMocks = import.meta.env.VITE_USE_MOCK === 'true'
 
   const fetchUserData = useCallback(async () => {
     dispatch({ type: 'FETCH_INIT' });
