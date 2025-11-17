@@ -1,5 +1,5 @@
 import type { KpiData } from '../types/apis';
-import type { KpiProps } from '../types/kpi';
+import type { KpiConfig } from '../types/ui';
 import Calories from '../assets/icons/burn.svg?react';
 import Proteine from '../assets/icons/proteine.svg?react';
 import Glucide from '../assets/icons/apple.svg?react';
@@ -9,7 +9,7 @@ import Lipides from '../assets/icons/cheeseburger.svg?react';
  * Classe Kpi pour formater les données nutritionnelles
  */
 export class Kpis {
-  public readonly kpis: KpiProps[];
+  public readonly kpis: KpiConfig[];
 
   constructor(kpis: KpiData | null) {
     if (!kpis) {

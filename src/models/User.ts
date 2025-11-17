@@ -1,5 +1,5 @@
 import { type UserData } from '../types/apis';
-import type { ScoreData } from '../types/charts/scoreData';
+import type { ScoreChartData } from '../types/ui';
 
 export class User {
   public readonly id: number;
@@ -41,7 +41,7 @@ export class User {
     return `${Math.round(this.score * 100)} %`;
   }
 
-  getScoreChartsData(): ScoreData[] {
+  getScoreChartsData(): ScoreChartData[] {
     return [
       {
         percent: Math.round(this.score * 100),
