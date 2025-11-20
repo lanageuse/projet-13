@@ -78,14 +78,9 @@ function useFetch<T>(endPoint: Endpoint): { state: FetchState<T> } {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Erreur inconnue';
-
-      // Si pas de données
       dispatch({
         type: 'FETCH_FAILURE',
-        error:
-          useMocks && !getMockedData<T>(endPoint)
-            ? `${errorMessage} (aucune donnée mockée disponible pour ${endPoint})`
-            : errorMessage,
+        error: errorMessage,
       });
     }
   }, [builtEndpoint, endPoint, useMocks]);
