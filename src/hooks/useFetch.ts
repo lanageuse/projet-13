@@ -6,29 +6,20 @@ import type { Endpoint } from '../types/apis';
 import { mockData } from '../mock/mockData';
 
 /**
- * Cache pour éviter de recalculer les endpoints mockés
- */
-const mockEndpointCache = new Map<string, string>();
-
-/**
- * Vérifie si des données mockées existent pour un endpoint donné
+ * Récupére les données mockés à partir d'un endpoint mock.
  * @param endpoint Endpoint à vérifier
  * @returns Les données mockées si elles existent, null sinon
  */
-function getMockedData<T>(endpoint: Endpoint): T | null {
-  // Utilisation du cache pour éviter les recalculs
-  let mockEndpoint = mockEndpointCache.get(endpoint);
-  if (!mockEndpoint) {
-    mockEndpoint = buildMockEndpoint(endpoint);
-    mockEndpointCache.set(endpoint, mockEndpoint);
-  }
 
-  // Vérification de l'existence des données
+function getMockedData<T>(endpoint: Endpoint): T | null {
+  const mockEndpoint = buildMockEndpoint(endpoint);
+
+  // Vérifie si les données existent et retourne les donnéees mockés
   if (mockEndpoint in mockData) {
     const rawData = (mockData as Record<string, unknown>)[mockEndpoint];
     return rawData as T;
   }
-
+  //sinon retourne null
   return null;
 }
 
@@ -38,9 +29,7 @@ function getMockedData<T>(endpoint: Endpoint): T | null {
  * @param {Endpoint} endPoint URL ou identifiant de l'endpoint à interroger
  * @returns {{ state: FetchState<T> }} Objet contenant l'état de la requête (chargement, données, erreur)
  */
-function useFetch<T>(
-  endPoint: Endpoint,
-): { state: FetchState<T> } {
+function useFetch<T>(endPoint: Endpoint): { state: FetchState<T> } {
   const [state, dispatch] = useReducer(
     fetchReducer<T>,
     InitialFetchState as FetchState<T>
@@ -50,7 +39,7 @@ function useFetch<T>(
   const builtEndpoint = useMemo(() => buildEndpoint(endPoint), [endPoint]);
 
   // Détermine si on utilise les données mockés ou le fetch api
-const useMocks = import.meta.env.VITE_USE_MOCK === 'true'
+  const useMocks = import.meta.env.VITE_USE_MOCK === 'true';
 
   const fetchUserData = useCallback(async () => {
     dispatch({ type: 'FETCH_INIT' });
@@ -58,7 +47,7 @@ const useMocks = import.meta.env.VITE_USE_MOCK === 'true'
     if (useMocks) {
       const mockedData = getMockedData<T>(endPoint);
       if (mockedData) {
-        console.log(`Utilisation des données mockées pour ${endPoint}`)
+        console.log(`Utilisation des données mockées pour ${endPoint}`);
         dispatch({
           type: 'FETCH_SUCCESS',
           payload: mockedData,
@@ -69,7 +58,7 @@ const useMocks = import.meta.env.VITE_USE_MOCK === 'true'
           error: `Aucune donnée mockée disponible pour ${endPoint}`,
         });
       }
-      return; 
+      return;
     }
 
     try {
