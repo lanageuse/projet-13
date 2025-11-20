@@ -1,4 +1,3 @@
-// src/contexts/DashboardContext.tsx
 import { createContext, useContext, useMemo } from 'react';
 import useFetch from '../hooks/useFetch';
 import {ApiEndpoints} from '../types/apis'
@@ -20,16 +19,14 @@ interface DashboardContextValue {
   formattedSessions: ReturnType<Session['formatSessions']> | null;
   formattedPerformance: ReturnType<Performance['adaptPerformanceData']> | null;
   kpis: Kpis | null;
-  
   isLoading: boolean;
   hasError: boolean;
-
   errors: string[];
 }
 
 /**
  * Contexte React pour centraliser l'accès aux données du tableau de bord.
- * Undefined par défaut pour forcer l'utilisation du Provider.
+ * Undefined par défaut pour forcer l'utilisation dans le Provider.
  */
 const DashboardContext = createContext<DashboardContextValue | undefined>(undefined);
 
@@ -122,7 +119,7 @@ export const DashboardProvider = ({ children }: React.PropsWithChildren) => {
  */
 export const useDashboard = () => {
   const context = useContext(DashboardContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useDashboard ne peut être utilisé que dans le DashboardProvider');
   }
   return context;
