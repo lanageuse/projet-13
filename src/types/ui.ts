@@ -15,7 +15,7 @@ export interface ChartTooltipProps {
  * Props pour les curseurs personnalisés
  */
 export interface ChartCursorProps {
-  points: Array<{ x: number; y: number }>;
+  points?: Array<{ x: number; y: number }>;
   width?: number;
   height?: number;
 }
