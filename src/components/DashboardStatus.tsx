@@ -10,7 +10,7 @@ export const DashboardStatus = ({ children }: { children: React.ReactNode }) => 
   // État de chargement
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center ">
+      <div className="flex min-h-screen items-center justify-center w-full ml-32">
         <div className="text-center">
           <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-red-600 border-r-transparent"></div>
           <p className="text-lg text-gray-600">Chargement des données...</p>
