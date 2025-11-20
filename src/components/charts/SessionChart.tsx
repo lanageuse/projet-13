@@ -6,12 +6,10 @@ import {
   Tooltip,
   ResponsiveContainer,
   YAxis,
-  Rectangle
+  Rectangle,
 } from 'recharts';
 import { useDashboard } from '../../contexts/DashboardContext';
 import type { ChartCursorProps, ChartTooltipProps } from '../../types/ui';
-
-
 
 const SessionTooltip = ({ active, payload }: ChartTooltipProps) => {
   if (active && payload && payload.length) {
@@ -46,19 +44,30 @@ const SessionCursor: React.FC<ChartCursorProps> = ({
   );
 };
 
-
-
 const SessionChart: React.FC = () => {
   const { formattedSessions } = useDashboard();
+
+  const safeSession = formattedSessions ?? [];
+  const extendedData = [
+    {
+      day: '',
+      sessionLength: safeSession[0]?.sessionLength ?? 0,
+    },
+    ...safeSession,
+    {
+      day: '',
+      sessionLength: safeSession[safeSession.length - 1]?.sessionLength ?? 0,
+    },
+  ];
 
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
       <AreaChart
-        data={formattedSessions || []}
+        data={extendedData || []}
         margin={{
           top: 0,
-          right: 0,
-          left: 15,
+          right: -20,
+          left: -20,
           bottom: 0,
         }}
       >
@@ -97,21 +106,20 @@ const SessionChart: React.FC = () => {
           axisLine={false}
           tick={{
             fill: 'white',
-            dx: -5,
             dy: -10,
-            fontWeight: 'bold',
-            panose1: 10,
           }}
           opacity={0.6}
+          interval={'preserveStartEnd'}
+          id='test'
         />
         <Tooltip
           itemStyle={{ color: 'black' }}
           contentStyle={{ border: 0 }}
-          cursor={<SessionCursor points={[]} />}
+          cursor={<SessionCursor />}
           content={<SessionTooltip />}
         />
         <Area
-          type="monotone"
+          type="monotoneX"
           unit={' min'}
           dataKey="sessionLength"
           stackId="1"
