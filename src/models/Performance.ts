@@ -43,6 +43,6 @@ export class Performance {
     return this.performanceData.data.map((item) => ({
       ...item,
       kindLabel: this.adapterLabel(this.performanceData!.kind[item.kind]),
-    }));
+    })).reverse();
   }
 }
