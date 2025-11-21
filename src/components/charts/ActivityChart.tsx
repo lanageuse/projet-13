@@ -9,7 +9,11 @@ import {
   YAxis,
 } from 'recharts';
 import { useDashboard } from '../../contexts/DashboardContext';
-import type { ChartLegendProps, ChartTooltipProps, LegendItem } from '../../types/ui';
+import type {
+  ChartLegendProps,
+  ChartTooltipProps,
+  LegendItem,
+} from '../../types/ui';
 
 /**
  * Légende personnalisée pour le graphique d'activité.
@@ -23,15 +27,17 @@ const ActivityLegend = (props: ChartLegendProps) => {
   return (
     <div className="flex flex-col-reverse flex-wrap justify-between gap-1 md:flex-row-reverse md:gap-3">
       <div className="flex w-full items-center justify-center gap-3 md:w-fit">
-        {payload?.map((item: LegendItem, index: number) => (
-          <div key={index} className="gap-1text-sm flex gap-1">
-            <span
-              style={{ backgroundColor: item.color, marginTop: '7px' }}
-              className="inline-block h-2 w-2 rounded-2xl"
-            />
-            {item.value}
-          </div>
-        ))}
+        {[...(payload ?? [])]
+          .map((item: LegendItem, index: number) => (
+            <div key={index} className="gap-1text-sm flex gap-1">
+              <span
+                style={{ backgroundColor: item.color, marginTop: '7px' }}
+                className="inline-block h-2 w-2 rounded-2xl"
+              />
+              {item.value}
+            </div>
+          ))
+          .reverse()}
       </div>
       <div className="w-full text-center text-[15px] font-medium md:w-fit md:text-left">
         Activité quotidienne
@@ -61,8 +67,6 @@ const ActivityTooltip = ({ active, payload }: ChartTooltipProps) => {
   );
 };
 
-
-
 /**
  * Composant graphique affichant l'activité quotidienne d'un utilisateur
  * Ce composant utilise un graphique en barres pour visualiser :
@@ -74,12 +78,16 @@ const ActivityTooltip = ({ active, payload }: ChartTooltipProps) => {
  *
  */
 const ActivityChart: React.FC = () => {
-  const {activitySessions} = useDashboard()
+  const { activitySessions } = useDashboard();
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight={320}>
       <BarChart data={activitySessions || []}>
         {/* Grille avec lignes horizontales uniquement */}
-        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <CartesianGrid
+          strokeDasharray="3 3"
+          vertical={false}
+          horizontalCoordinatesGenerator={() => [70, 180]}
+        />
 
         {/* Légende personnalisée positionnée en haut à droite */}
         <Legend
@@ -107,6 +115,9 @@ const ActivityChart: React.FC = () => {
           orientation="right"
           axisLine={false}
           tickLine={false}
+          domain={['dataMin - 1', 'dataMax']}
+          interval={0}
+          allowDecimals={false}
         />
 
         {/* Axe Y de gauche pour les calories (masqué avec domaine ajusté) */}
