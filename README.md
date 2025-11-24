@@ -22,20 +22,7 @@ npm install
 # ou
 yarn
 ```
-
-3. **Configurer les variables d’environnement**
-
-Crée un fichier `.env` en se basant sur le fichier `.en.example` à la racine du projet avec :
-
-```env
-VITE_BASE_URL=http://localhost:3000
-VITE_USER_ID=12
-```
-
-- `VITE_BASE_URL` : URL de l’API (backend)
-- `VITE_USER_ID` : identifiant utilisateur ❗❗(12 ou 18) ❗❗
-
-4. **Lancer le frontend**
+3. **Lancer le frontend**
 
 ```bash
 npm run dev
@@ -43,7 +30,7 @@ npm run dev
 yarn dev
 ```
 
-5. **Lancer le backend**
+4. **Lancer le backend**
 
 ```bash
 git clone https://github.com/OpenClassrooms-Student-Center/SportSee
